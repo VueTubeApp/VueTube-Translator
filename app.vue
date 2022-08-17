@@ -36,7 +36,7 @@ fetch(
     </defs>
   </svg>
 
-  <div class="pa-8 h-screen">
+  <div class="pa-4 h-screen">
     <div
       class="d-flex h-100 rounded-xl overflow-hidden"
       :class="swoppage ? 'flexboxswopped' : 'flexbox'"
