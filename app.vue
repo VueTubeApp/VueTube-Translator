@@ -1,84 +1,71 @@
 <template>
-  <div>
-    <NuxtWelcome />
-    <v-form>
-      <v-container>
-        <v-row>
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Regular"></v-text-field>
-          </v-col>
+  <svg
+    height="0"
+    width="0"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    style="display: none"
+  >
+    <defs>
+      <filter id="fancy-goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+        <feColorMatrix
+          in="blur"
+          type="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+          result="goo"
+        />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
 
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Regular"
-              placeholder="Placeholder"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Solo" variant="solo"></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Solo"
-              variant="solo"
-              placeholder="Placeholder"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Filled" variant="filled"></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Filled"
-              placeholder="Placeholder"
-              variant="filled"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Outlined" variant="outlined"></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Outlined"
-              placeholder="Placeholder"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Plain" variant="plain"></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Plain"
-              placeholder="Placeholder"
-              variant="plain"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Underlined"
-              variant="underlined"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field
-              label="Underlined"
-              placeholder="Placeholder"
-              variant="underlined"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+  <div class="pa-8 h-screen">
+    <div
+      class="d-flex h-100 rounded-xl overflow-hidden"
+    >
+      <div class="w-100">
+        <v-form class="pa-4 h-100 d-flex justify-center align-center" style="border-radius: 1rem; background: #222">
+          <v-text-field style="max-width: 50%;" class="mt-5" label="Github Import" shaped variant="outlined"></v-text-field>
+        </v-form>
+      </div>
+      <div class="h-100 pa-2" style="background: #121212; filter: url(#fancy-goo)">
+        <div
+          style="
+            top: 50%;
+            left: 50%;
+            position: fixed;
+            background: #121212;
+            transform: translate(-50%, -50%);
+          "
+          class="swop pa-5 rounded-circle"
+        >
+          <v-icon size="2rem"> mdi-swap-horizontal </v-icon>
+        </div>
+      </div>
+      <div class="w-100">
+        <v-form class="pa-4 h-100 d-flex justify-center align-center" style="border-radius: 1rem; background: #222">
+          <v-text-field style="max-width: 50%;" class="mt-5" label="Github Export" shaped variant="outlined"></v-text-field>
+        </v-form>
+      </div>
+    </div>
   </div>
 </template>
+
+<style>
+.swop {
+  cursor: pointer;
+  transition: 0.25s ease transform;
+}
+.swop:hover {
+  transform: translate(-50%, -50%) rotate(180deg) !important;
+}
+.v-field__outline__start {
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+}
+.v-field__outline__end {
+  border-top-right-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+</style>
