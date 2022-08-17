@@ -1,6 +1,17 @@
 <script setup>
 import { ref } from "vue";
 let swoppage = ref(false);
+let jsource = ref("123");
+fetch(
+  "https://raw.githubusercontent.com/VueTubeApp/VueTube/main/NUXT/plugins/languages/english.js"
+)
+  .then((data) => {
+    data.text().then((text) => {
+      console.log(text.substring(text.indexOf("{"), text.length - 2))
+      let edit = text.substring(text.indexOf("{"), text.length - 2)
+      jsource.value = eval('(' + edit + ')')
+    });
+  });
 </script>
 
 <template>
@@ -32,16 +43,22 @@ let swoppage = ref(false);
     >
       <div class="h-100 w-100">
         <v-form
-          class="pa-4 h-100 d-flex justify-center align-center"
-          style="border-radius: 1rem; background: #222"
+          class="py-4 px-6 h-100 d-flex flex-column"
+          style="border-radius: 1rem; background: #222; overflow-y: scroll;"
         >
-          <v-text-field
-            style="max-width: 50%"
-            class="mt-5"
-            label="Github Import"
-            shaped
-            variant="outlined"
-          ></v-text-field>
+          <!-- TODO: check object depth and make this dry -->
+          <p v-for="(value, key) in jsource" style="color: grey;" :key="key">
+            {{ key }} {{ value.length > 1 ? ': ' + value : '/' }}
+            <p v-if="!(value.length > 1)" class="pl-4" style="color: white;" v-for="(value1, key1) in value" :key="key1">
+              {{ key1 }} {{ value1.length > 1 ? ': ' + value1 : '/' }}
+              <p v-if="!(value1.length > 1)" class="pl-4" style="color: pink;" v-for="(value2, key2) in value1" :key="key2">
+                {{ key2 }} {{ value2.length > 1 ? ': ' + value2 : '/' }}
+                <p v-if="!(value2.length > 1)" class="pl-4" style="color: lightblue;" v-for="(value3, key3) in value2" :key="key3">
+                  {{ key3 }} : level 4
+                </p>
+              </p>
+            </p>
+          </p>
         </v-form>
       </div>
       <div class="pa-2" style="background: #121212; filter: url(#fancy-goo)">
@@ -53,7 +70,7 @@ let swoppage = ref(false);
             background: #121212;
             transform: translate(-50%, -50%);
           "
-          class="swop pa-3 rounded-circle"
+          class="swop pa-3 rounded-lg"
           @click="swoppage = !swoppage"
         >
           <v-icon size="2rem">mdi-swap-horizontal</v-icon>
@@ -61,15 +78,15 @@ let swoppage = ref(false);
       </div>
       <div class="h-100 w-100">
         <v-form
-          class="pa-4 h-100 d-flex justify-center align-center"
-          style="border-radius: 1rem; background: #222"
+          class="py-4 px-6 h-100 d-flex flex-column justify-center align-center"
+          style="border-radius: 1rem; background: #222; overflow-y: scroll;"
         >
           <v-text-field
-            style="max-width: 50%"
-            class="mt-5"
+            style="width: 50%; max-height: 80px"
             label="Github Export"
-            shaped
             variant="outlined"
+            class="mt-5"
+            shaped
           ></v-text-field>
         </v-form>
       </div>
@@ -82,11 +99,20 @@ let swoppage = ref(false);
   cursor: pointer;
   transition: 0.25s ease transform;
 }
+.swop > i {
+  transition: 0.25s ease transform;
+}
 .swop:hover {
-  transform: translate(-50%, -50%) rotate(-180deg) scale(1.5) !important;
+  transform: translate(-50%, -50%) scale(1.5) !important;
+}
+.swop:hover > i {
+  transform: rotate(-180deg);
 }
 .swop:active {
-  transform: translate(-50%, -50%) rotate(180deg) scale(1) !important;
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+.swop:active > i{
+  transform: rotate(180deg);
 }
 .flexboxswopped {
   flex-direction: row-reverse;
@@ -98,8 +124,14 @@ let swoppage = ref(false);
   .flexboxswopped {
     flex-direction: column-reverse;
   }
-  .swop > i {
-    transform: rotate(90deg);
+  .flexbox > div {
+    max-height: calc(50% - 0.5rem);
+  }
+  .flexboxswopped > div {
+    max-height: calc(50% - 0.5rem);
+  }
+  .swop {
+    transform: translate(-50%, -50%) rotate(90deg) !important;
   }
 }
 .v-field__outline__start {
