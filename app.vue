@@ -1,3 +1,8 @@
+<script setup>
+import { ref } from "vue";
+let swoppage = ref(false);
+</script>
+
 <template>
   <svg
     height="0"
@@ -21,7 +26,10 @@
   </svg>
 
   <div class="pa-8 h-screen">
-    <div class="d-flex flexbox h-100 rounded-xl overflow-hidden">
+    <div
+      class="d-flex h-100 rounded-xl overflow-hidden"
+      :class="swoppage ? 'flexboxswopped' : 'flexbox'"
+    >
       <div class="h-100 w-100">
         <v-form
           class="pa-4 h-100 d-flex justify-center align-center"
@@ -46,6 +54,7 @@
             transform: translate(-50%, -50%);
           "
           class="swop pa-3 rounded-circle"
+          @click="swoppage = !swoppage"
         >
           <v-icon size="2rem">mdi-swap-horizontal</v-icon>
         </div>
@@ -74,11 +83,20 @@
   transition: 0.25s ease transform;
 }
 .swop:hover {
-  transform: translate(-50%, -50%) rotate(180deg) scale(1.5) !important;
+  transform: translate(-50%, -50%) rotate(-180deg) scale(1.5) !important;
+}
+.swop:active {
+  transform: translate(-50%, -50%) rotate(180deg) scale(1) !important;
+}
+.flexboxswopped {
+  flex-direction: row-reverse;
 }
 @media screen and (orientation: portrait) {
   .flexbox {
     flex-direction: column;
+  }
+  .flexboxswopped {
+    flex-direction: column-reverse;
   }
   .swop > i {
     transform: rotate(90deg);
