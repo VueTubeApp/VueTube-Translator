@@ -21,15 +21,22 @@
   </svg>
 
   <div class="pa-8 h-screen">
-    <div
-      class="d-flex h-100 rounded-xl overflow-hidden"
-    >
-      <div class="w-100">
-        <v-form class="pa-4 h-100 d-flex justify-center align-center" style="border-radius: 1rem; background: #222">
-          <v-text-field style="max-width: 50%;" class="mt-5" label="Github Import" shaped variant="outlined"></v-text-field>
+    <div class="d-flex flexbox h-100 rounded-xl overflow-hidden">
+      <div class="h-100 w-100">
+        <v-form
+          class="pa-4 h-100 d-flex justify-center align-center"
+          style="border-radius: 1rem; background: #222"
+        >
+          <v-text-field
+            style="max-width: 50%"
+            class="mt-5"
+            label="Github Import"
+            shaped
+            variant="outlined"
+          ></v-text-field>
         </v-form>
       </div>
-      <div class="h-100 pa-2" style="background: #121212; filter: url(#fancy-goo)">
+      <div class="pa-2" style="background: #121212; filter: url(#fancy-goo)">
         <div
           style="
             top: 50%;
@@ -38,14 +45,23 @@
             background: #121212;
             transform: translate(-50%, -50%);
           "
-          class="swop pa-5 rounded-circle"
+          class="swop pa-3 rounded-circle"
         >
-          <v-icon size="2rem"> mdi-swap-horizontal </v-icon>
+          <v-icon size="2rem">mdi-swap-horizontal</v-icon>
         </div>
       </div>
-      <div class="w-100">
-        <v-form class="pa-4 h-100 d-flex justify-center align-center" style="border-radius: 1rem; background: #222">
-          <v-text-field style="max-width: 50%;" class="mt-5" label="Github Export" shaped variant="outlined"></v-text-field>
+      <div class="h-100 w-100">
+        <v-form
+          class="pa-4 h-100 d-flex justify-center align-center"
+          style="border-radius: 1rem; background: #222"
+        >
+          <v-text-field
+            style="max-width: 50%"
+            class="mt-5"
+            label="Github Export"
+            shaped
+            variant="outlined"
+          ></v-text-field>
         </v-form>
       </div>
     </div>
@@ -58,7 +74,15 @@
   transition: 0.25s ease transform;
 }
 .swop:hover {
-  transform: translate(-50%, -50%) rotate(180deg) !important;
+  transform: translate(-50%, -50%) rotate(180deg) scale(1.5) !important;
+}
+@media screen and (orientation: portrait) {
+  .flexbox {
+    flex-direction: column;
+  }
+  .swop > i {
+    transform: rotate(90deg);
+  }
 }
 .v-field__outline__start {
   border-top-left-radius: 1rem !important;
