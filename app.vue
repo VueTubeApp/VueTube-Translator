@@ -47,13 +47,13 @@ fetch(
           style="border-radius: 1rem; background: #222; overflow-y: scroll;"
         >
           <!-- TODO: check object depth and make this dry -->
-          <p v-for="(value, key) in jsource" style="color: grey;" :key="key">
-            {{ key }} {{ value.length > 1 ? ': ' + value : '/' }}
-            <p v-if="!(value.length > 1)" class="pl-4" style="color: white;" v-for="(value1, key1) in value" :key="key1">
-              {{ key1 }} {{ value1.length > 1 ? ': ' + value1 : '/' }}
-              <p v-if="!(value1.length > 1)" class="pl-4" style="color: pink;" v-for="(value2, key2) in value1" :key="key2">
-                {{ key2 }} {{ value2.length > 1 ? ': ' + value2 : '/' }}
-                <p v-if="!(value2.length > 1)" class="pl-4" style="color: lightblue;" v-for="(value3, key3) in value2" :key="key3">
+          <p style="color: grey;" v-for="(value, key) in jsource" :key="key">
+            <div class="rounded-b-lg" :class="value.length ? '' : 'px-2'" :style="value.length ? '' : 'display: absolute; border: 1px solid grey; max-width: max-content; transform: rotate(-90deg) translateX(-100%); transform-origin: 0 100%;'">{{ key }} {{ value.length ? ': ' + value : '/' }}</div>
+            <p v-if="!value.length" class="pl-4" style="color: white;" v-for="(value1, key1) in value" :key="key1">
+              {{ key1 }} {{ value1.length ? ': ' + value1 : '/' }}
+              <p v-if="!value1.length" class="pl-4" style="color: pink;" v-for="(value2, key2) in value1" :key="key2">
+                {{ key2 }} {{ value2.length ? ': ' + value2 : '/' }}
+                <p v-if="!value2.length" class="pl-4" style="color: lightblue;" v-for="(value3, key3) in value2" :key="key3">
                   {{ key3 }} : level 4
                 </p>
               </p>
@@ -116,6 +116,12 @@ fetch(
 }
 .flexboxswopped {
   flex-direction: row-reverse;
+}
+.flexbox > div {
+  max-width: calc(50% - 0.5rem);
+}
+.flexboxswopped > div {
+  max-width: calc(50% - 0.5rem);
 }
 @media screen and (orientation: portrait) {
   .flexbox {
